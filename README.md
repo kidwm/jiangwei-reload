@@ -80,6 +80,14 @@ SvNN.jwzr.json
 
 支援的關卡與保存節點請參閱各版 Release 說明。
 
+### 戰場自動存檔
+
+環境設定中的「戰場自動存檔」預設開啟，可自行關閉。自動存檔使用獨立的 `SvAuto[bdes].e5s` 與
+`SvAuto.jwzr.json`，不覆寫十個編號存檔槽。
+
+讀取列表有自動存檔時，會置頂顯示 **Auto**。原版不列出 `SvAuto`；要回原版續玩， 請先在 RELOAD 讀取
+Auto，再手動另存編號槽位。
+
 ## 更新程式
 
 先關閉程式，再替換：
@@ -88,7 +96,7 @@ SvNN.jwzr.json
 - **Windows**：`JW_RELOAD.cmd` 與完整的 `JW_RELOAD` 程式資料夾
 - **Linux**：完整的 `JW_RELOAD` 程式資料夾
 
-請保留原版遊戲素材、存檔、`SvNN.jwzr.json` 與存檔備份資料夾。
+請保留原版遊戲素材、編號存檔、`SvNN.jwzr.json`、完整的 `SvAuto` 檔案與存檔備份資料夾。
 
 ## 常見問題
 
