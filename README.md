@@ -4,7 +4,8 @@
 
 ## 下載與使用前準備
 
-[下載最新版本](https://github.com/kidwm/jiangwei-reload/releases/latest)
+[下載最新版本](https://github.com/kidwm/jiangwei-reload/releases/latest) ·
+[歷版更新紀錄](https://github.com/kidwm/jiangwei-reload/blob/main/CHANGELOG.md)
 
 請在 Release 頁面的 **Assets** 下載對應平台的 ZIP 檔：
 
