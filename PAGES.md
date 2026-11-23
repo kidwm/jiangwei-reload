@@ -16,6 +16,10 @@ npx cf auth whoami
 npx cf pages get jiangwei-reload
 ```
 
+若本機原有的 Node.js 版本較舊，可透過 npm 在單一命令內使用支援的版本，
+例如 `npm exec --yes --package=node@24.22.3 -- npm ci`。部署時同樣可執行
+`npm exec --yes --package=node@24.22.3 -- npm run pages:deploy -- preview`。
+
 自動化環境可透過環境變數提供限該帳號的 Pages Write API token
 （`CLOUDFLARE_API_TOKEN`）及 `CLOUDFLARE_ACCOUNT_ID`。使用具名 cf 設定檔時請匯出
 `CLOUDFLARE_AUTH_PROFILE`。金鑰與憑證只放在本機憑證庫或執行環境。

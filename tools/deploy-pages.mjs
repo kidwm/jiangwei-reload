@@ -48,15 +48,6 @@ for (const name of names.filter(name => name !== "_headers")) {
 // cf exposes deployment creation but not the asset operations. Its own OAuth
 // library obtains the project upload JWT through the same selected cf identity.
 const profile = process.env.CLOUDFLARE_AUTH_PROFILE || "default";
-const cli = fileURLToPath(new URL("../node_modules/cf/bin/cf", import.meta.url));
-const cf = (...args) => JSON.parse(execFileSync(process.execPath, [cli, ...args, "--profile", profile], {
-  cwd, encoding: "utf8", stdio: ["ignore", "pipe", "inherit"],
-}));
-const details = cf("pages", "get", project);
-assert.equal(details.subdomain, project + ".pages.dev");
-assert.equal(details.production_branch, "main");
-assert.equal(details.source?.type ?? null, null, "Expected Direct Upload project");
-
 const auth = createCfAuth({
   userAgent: "jiangwei-reload-pages", logger: { ...console, debug() {} },
   select() { throw new Error("Set CLOUDFLARE_ACCOUNT_ID to select the Pages account."); },
@@ -65,6 +56,16 @@ const auth = createCfAuth({
 });
 auth.setProfile(profile);
 const account = await auth.requireAuth({});
+const cli = fileURLToPath(new URL("../node_modules/cf/bin/cf", import.meta.url));
+const cf = (...args) => JSON.parse(execFileSync(process.execPath, [cli, ...args, "--profile", profile], {
+  cwd, env: { ...process.env, CLOUDFLARE_ACCOUNT_ID: account },
+  encoding: "utf8", stdio: ["ignore", "pipe", "inherit"],
+}));
+const details = cf("pages", "get", project);
+assert.equal(details.subdomain, project + ".pages.dev");
+assert.equal(details.production_branch, "main");
+assert.equal(details.source?.type ?? null, null, "Expected Direct Upload project");
+
 async function api(path, token, body) {
   const response = await fetch("https://api.cloudflare.com/client/v4" + path, {
     method: body ? "POST" : "GET", redirect: "error", signal: AbortSignal.timeout(60000),
