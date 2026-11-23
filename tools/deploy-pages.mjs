@@ -19,9 +19,9 @@ const message = git("show", "-s", "--format=%s", commit).toString().trim();
 
 // Read one immutable source tree. Only these regular blobs belong on the public origin.
 const names = [
-  "_headers", "apple-touch-icon.png", "favicon.ico", "favicon.svg", "icon-192.png",
-  "icon-512.png", "icon-maskable-512.png", "index.html", "launcher.css", "launcher.js",
-  "manifest.webmanifest", "public-key.json", "sw.js",
+  "_headers", "apple-touch-icon.png", "desktop-start.png", "favicon.ico", "favicon.svg", "icon-192.png",
+  "icon-512.png", "icon-maskable-512.png", "index.html", "lan-server.png", "launcher.css", "launcher.js",
+  "manifest.webmanifest", "portal.css", "public-key.json", "sw.js",
 ];
 const tree = git("ls-tree", "-z", commit + ":pwa").toString().split("\0").filter(Boolean);
 assert.deepEqual(tree.map(line => {
@@ -81,7 +81,7 @@ async function api(path, token, body) {
 const { jwt } = await api("/accounts/" + account + "/pages/projects/" + project + "/upload-token",
   auth.requireApiToken().apiToken);
 assert.ok(jwt, "Missing project upload authorization");
-// The entire launcher is about 180 KiB. A single upload also works on a cold asset cache.
+// Upload the small static site in one batch, including on a cold asset cache.
 await api("/pages/assets/upload", jwt, files);
 await api("/pages/assets/upsert-hashes", jwt, { hashes: Object.values(manifest) });
 

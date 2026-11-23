@@ -1,7 +1,21 @@
-const form = document.querySelector("form");
+const form = document.querySelector("#connection form");
 const host = document.querySelector("#host");
 const status = document.querySelector("#status");
 const launcher = document.body;
+const portal = document.querySelector("#jw-portal");
+const installedLauncher = document.querySelector("#installed-launcher");
+const pictureDialog = portal.querySelector("dialog");
+const enlargedPicture = pictureDialog.querySelector("img");
+for (const shot of portal.querySelectorAll(".shot")) {
+  shot.addEventListener("click", () => {
+    const image = shot.querySelector("img");
+    enlargedPicture.src = image.src;
+    enlargedPicture.alt = image.alt;
+    pictureDialog.showModal();
+  });
+}
+pictureDialog.querySelector("button").addEventListener("click", () => pictureDialog.close());
+
 const connection = document.querySelector("#connection");
 const requirements = document.querySelector("#requirements");
 const button = form.querySelector("button");
@@ -21,6 +35,10 @@ function canSubmit() {
 function updateLauncher() {
   const available = canSubmit();
   const needsPermission = available && permission.state === "prompt";
+  const installed = isInstalledWindow();
+  if (installed && pictureDialog.open) pictureDialog.close();
+  portal.hidden = installed;
+  installedLauncher.hidden = !installed;
   connection.hidden = !available;
   requirements.hidden = available;
   permissionHelp.hidden = !needsPermission;
@@ -159,6 +177,7 @@ form.addEventListener("submit", async (event) => {
     updateLauncher();
   }
 });
+updateLauncher();
 standalone.addEventListener("change", updateLauncher);
 try {
   permission = await navigator.permissions.query({ name: "local-network" });

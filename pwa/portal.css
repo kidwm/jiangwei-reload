@@ -1,0 +1,62 @@
+body.entry-page { margin:0; }
+body.entry-page:has(#jw-portal:not([hidden])) { color-scheme:light dark; background:light-dark(#f5f2e9,#232824); }
+@media (display-mode:standalone) {
+  #jw-portal { display:none; }
+  body.entry-page { background:#171a18; }
+}
+#jw-portal { max-width:1280px; margin-inline:auto; }
+#jw-portal { --paper:light-dark(#f5f2e9,#232824); --text:light-dark(#1d302a,#f0eee3); --dim:light-dark(#525e55,#bcc4b9); --rule:light-dark(#c9cabe,#4c584d); --mark:url("/favicon.svg"); container-type:inline-size; color:var(--text); background:var(--paper); font:15px/1.65 "PingFang TC","Microsoft JhengHei",sans-serif; }
+#jw-portal * { box-sizing:border-box; }
+#jw-portal :is(h1,h2,h3,h4,p) { margin:0; }
+#jw-portal :is(h1,h2,h3) { font-family:"Songti TC","Hiragino Mincho ProN","PMingLiU",serif; }
+#jw-portal a { color:inherit; text-decoration:none; }
+#jw-portal a:hover { text-decoration:underline; text-underline-offset:.24em; }
+#jw-portal :is(a,button):focus-visible { outline:3px solid #b56821; outline-offset:4px; }
+#jw-portal footer { border-top:1px solid var(--rule); padding:8px clamp(18px,5cqw,60px); font-size:14px; }
+#jw-portal footer nav { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:0 24px; }
+#jw-portal footer a { display:inline-flex; align-items:center; gap:.25em; min-height:44px; text-decoration:underline; text-underline-offset:.24em; }
+#jw-portal .hero { position:relative; isolation:isolate; display:grid; grid-template-columns:1.42fr 1fr; align-items:center; gap:14px; background:#092e28; color:#fff6e3; padding:clamp(28px,4.4cqw,55px) clamp(20px,5cqw,60px); overflow:hidden; }
+#jw-portal .hero:before { content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(ellipse at 75% 35%,#214b3b 0,transparent 55%),linear-gradient(118deg,#0c332c,#092c26 64%,#173e32); }
+#jw-portal .hero:after { content:""; position:absolute; inset:8px 0; border-block:1px solid #d7be7838; pointer-events:none; }
+#jw-portal .hero h1 { font-size:clamp(38px,6.3cqw,75px); line-height:1.13; font-weight:700; letter-spacing:.055em; color:#fff6e3; }
+#jw-portal .hero h1 { display:grid; justify-items:center; width:max-content; max-width:100%; margin:0 0 20px; }
+#jw-portal .zh-title { padding-inline-start:.055em; }
+#jw-portal .roman { margin-top:.8em; color:#d6cfb9; font:500 clamp(15px,2cqw,24px)/1.2 "Baskerville","Times New Roman",serif; letter-spacing:.36em; padding-inline-start:.36em; }
+#jw-portal .intro { max-width:31em; color:#dae3d8; font-size:clamp(14px,1.52cqw,17px); line-height:1.75; text-wrap:pretty; }
+#jw-portal .download { display:inline-flex; align-items:center; gap:9px; min-height:43px; margin-top:21px; padding:9px 17px; font-weight:600; color:#20382c; background:#f1d6a1; border-radius:3px; }
+#jw-portal .platforms { margin-top:10px; font:12px/1.5 "PingFang TC",sans-serif; letter-spacing:.04em; color:#c1d0c4; }
+#jw-portal .insignia { position:relative; display:grid; place-items:center; margin:auto; width:min(100%,253px); aspect-ratio:1; }
+#jw-portal .insignia:before,#jw-portal .insignia:after { content:""; position:absolute; border:1px solid #c6ae713f; border-radius:50%; width:93%; height:93%; }
+#jw-portal .insignia:after { width:100%; height:100%; border-color:#c6ae7124; }
+#jw-portal .beast { width:101%; height:101%; background:var(--mark) center/contain no-repeat; mix-blend-mode:lighten; }
+#jw-portal .start { padding:30px clamp(18px,5cqw,60px) 36px; }
+#jw-portal .section-head { display:flex; align-items:center; gap:17px; }
+#jw-portal h2 { color:var(--text); font-size:25px; font-weight:700; letter-spacing:.06em; line-height:1.3; }
+#jw-portal .section-head:after { content:""; height:1px; flex:1; background:var(--rule); }
+#jw-portal .guide { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,38%); gap:clamp(24px,5cqw,64px); align-items:center; padding-block:24px; scroll-margin-top:16px; }
+#jw-portal .guide + .guide { border-top:1px solid var(--rule); }
+#jw-portal .guide h3 { font-size:22px; }
+#jw-portal .guide h4 { margin-top:14px; font-size:15px; }
+#jw-portal .guide h5 { margin:12px 0 0; font-size:14px; }
+#jw-portal .guide ol { margin:4px 0 12px; padding-inline-start:1.6em; max-width:38em; color:var(--dim); }
+#jw-portal .guide li + li { margin-top:4px; }
+#jw-portal .guide p { margin-top:6px; max-width:38em; color:var(--dim); }
+#jw-portal .guide a { text-decoration:underline; text-underline-offset:.2em; }
+#jw-portal .shot { display:block; width:100%; padding:0; border:1px solid var(--rule); border-radius:4px; background:light-dark(#e2e2d8,#343d35); cursor:zoom-in; }
+#jw-portal .shot img { display:block; width:100%; height:auto; }
+#jw-portal dialog { max-width:94vw; border:1px solid var(--rule); border-radius:4px; padding:12px; background:var(--paper); color:var(--text); }
+#jw-portal dialog::backdrop { background:#081410cc; }
+#jw-portal dialog img { display:block; max-width:100%; max-height:78dvh; object-fit:contain; }
+#jw-portal dialog button { display:block; margin:10px 0 0 auto; padding:5px 13px; font:inherit; border:1px solid var(--rule); background:transparent; color:var(--text); cursor:pointer; }
+@container (max-width:700px) {
+  #jw-portal .guide { grid-template-columns:1fr; gap:16px; }
+  #jw-portal .shot { max-width:480px; }
+}
+@container (max-width:570px) {
+  #jw-portal .hero { display:block; padding:33px 20px 26px; }
+  #jw-portal .hero-copy { position:relative; z-index:1; }
+  #jw-portal .hero h1 { font-size:clamp(34px,8.4cqw,47px); }
+  #jw-portal .insignia { position:absolute; right:-22px; top:-22px; width:160px; opacity:.16; }
+  #jw-portal .intro { max-width:28em; }
+  #jw-portal .start { padding-top:22px; }
+}

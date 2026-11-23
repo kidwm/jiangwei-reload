@@ -9,36 +9,94 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
   <link rel="stylesheet" href="/launcher.css">
+  <link rel="stylesheet" href="/portal.css">
   <title>三國志姜維傳．RELOAD</title>
 </head>
-<body class="launcher">
-  <main>
-    <div id="requirements">
-      <h1>安裝區網遊戲入口</h1>
-      <p id="permission-blocked" hidden>此入口的區域網路存取已被封鎖。請到 Chrome 的「網站設定」，將這個網站的區域網路權限改為「允許」。</p>
-      <p>將這個入口安裝成網頁應用程式（PWA），即使遊戲主機換了 IP，也能從同一個圖示開啟並輸入新位址。首次連線時，可直接在應用程式內允許區域網路存取。</p>
-      <p>請使用支援區域網路存取（LNA）的瀏覽器。以下步驟以 Chrome 為例。</p>
-      <ol>
-        <li><strong>安裝入口。</strong>在電腦上，點網址列右側的安裝圖示，或從「更多」→「投放、儲存及分享」選擇「將頁面安裝為應用程式」。在 Android 上，點「更多」→「安裝並建立捷徑」→「安裝」。</li>
-        <li><strong>開啟入口。</strong>從主畫面或應用程式清單開啟「姜維傳 RELOAD」，輸入遊戲主機顯示的 IP 和埠號。首次使用時，按「授權並連線」，在瀏覽器的區域網路提示中選擇「允許」。</li>
-      </ol>
-      <p>使用 iPad Safari 遊玩時，可直接掃描遊戲主機上的 QR Code。</p>
-    </div>
-    <section id="connection" hidden>
-      <p class="game-name">三國志姜維傳<span>RELOAD</span></p>
-      <h1>連線至區網伺服器</h1>
-      <p>請使用支援區域網路存取（LNA）的瀏覽器遊玩。</p>
-      <p>在主機上開啟「區網伺服器」，並將兩台裝置連上同一個區網。</p>
-      <p id="permission-help" hidden>首次連線需要區域網路權限。輸入遊戲主機的位址並按「授權並連線」，Chrome 會詢問是否允許這個入口連到區網裝置。</p>
-      <form>
-        <label for="host">主機 IP 和埠號</label>
-        <input id="host" required autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="192.168.50.20:8788">
-        <button type="submit" disabled>請求連線</button>
-      </form>
-      <p id="status" role="status"></p>
-    </section>
-    <a id="project-link" href="https://github.com/kidwm/jiangwei-reload">三國志姜維傳．RELOAD（GitHub）</a>
-  </main>
+<body class="entry-page">
+  <div id="jw-portal">
+    <header class="hero" aria-labelledby="jw-portal-title">
+      <div class="hero-copy">
+        <h1 id="jw-portal-title"><span class="zh-title">三國志姜維傳</span><span class="roman">RELOAD</span></h1>
+        <p class="intro">在當代桌面系統上重新加入常敗軍，也能在平板上用觸控操兵布陣。</p>
+        <p class="intro">遊玩前請準備《姜維傳 1.28》原版資料。</p>
+        <a class="download" href="https://github.com/kidwm/jiangwei-reload/releases/latest" target="_blank" rel="noopener noreferrer">下載啟動程式 <span aria-hidden="true">↓</span></a>
+        <p class="platforms">macOS · Windows · Linux</p>
+      </div>
+      <div class="insignia" aria-hidden="true"><div class="beast"></div></div>
+    </header>
+    <main class="start" aria-labelledby="jw-start-title">
+      <div class="section-head"><h2 id="jw-start-title">開始遊玩</h2></div>
+      <section class="guide" aria-labelledby="desktop-heading">
+        <div>
+          <h3 id="desktop-heading">在電腦上啟動遊戲</h3>
+          <p>下載對應系統的 ZIP，解壓縮後，依<a href="https://github.com/kidwm/jiangwei-reload#解壓與啟動" target="_blank" rel="noopener noreferrer">各平台啟動說明</a>將程式放進原版遊戲資料夾並開啟。</p>
+          <p>看到黑底的啟動畫面時，點一下畫面，或按 Enter 或空白鍵進入遊戲。</p>
+        </div>
+        <button class="shot" type="button" aria-label="放大桌面版啟動畫面" aria-haspopup="dialog"><img loading="lazy" src="/desktop-start.png" width="1040" height="841" alt="黑底啟動畫面中央顯示「三國志姜維傳」與 Click to Start"></button>
+      </section>
+      <section class="guide" id="jw-install" aria-labelledby="lan-heading">
+        <div>
+          <h3 id="lan-heading">從另一台裝置連線</h3>
+          <p>在遊戲主機的「JW_RELOAD」選單開啟「區網伺服器」，並讓另一台裝置連上同一個區域網路。</p>
+          <h4>用 Chrome 安裝區網入口</h4>
+          <p>在要用來遊玩的裝置上，用 Chrome 開啟本站（<a href="https://jiangwei-reload.pages.dev/">jiangwei-reload.pages.dev</a>），依下列步驟將<strong>這一頁安裝成應用程式</strong>。</p>
+          <h5>電腦版 Chrome</h5>
+          <ol>
+            <li>點網址列右側的「安裝」圖示。若找不到圖示，點 Chrome 右上角的「更多」⋮，選「投放、儲存及分享」，再選「將頁面安裝為應用程式」。</li>
+            <li>在「三國志姜維傳．RELOAD」的確認視窗點「安裝」。日後可從電腦的應用程式清單開啟。</li>
+          </ol>
+          <h5>Android 版 Chrome</h5>
+          <ol>
+            <li>點網址列右側的「更多」⋮，選「安裝並建立捷徑」。</li>
+            <li>選「安裝」，依畫面提示完成安裝。回到主畫面或應用程式清單，點「姜維傳 RELOAD」圖示。</li>
+          </ol>
+          <p>開啟入口後，輸入遊戲主機顯示的 IP 與埠號。首次點「授權並連線」時，在 Chrome 提示中選擇「允許」，再由主機玩家核准。</p>
+          <h4>用 iPad Safari 掃碼連線</h4>
+          <p>用 iPad 掃描自己主機畫面上的 QR Code，以 Safari 開啟遊戲。</p>
+        </div>
+        <button class="shot" type="button" aria-label="放大區網伺服器畫面" aria-haspopup="dialog"><img loading="lazy" src="/lan-server.png" width="1040" height="841" alt="區網伺服器視窗中的主機位址、QR Code 與連線狀態"></button>
+      </section>
+    </main>
+    <footer>
+      <nav aria-label="專案導覽">
+        <a href="https://github.com/kidwm/jiangwei-reload/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">版本紀錄 <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/kidwm/jiangwei-reload/blob/main/README.md" target="_blank" rel="noopener noreferrer">GitHub 專案說明 <span aria-hidden="true">↗</span></a>
+      </nav>
+    </footer>
+    <dialog aria-label="遊戲畫面大圖">
+      <img alt="">
+      <button type="button" autofocus>關閉大圖</button>
+    </dialog>
+  </div>
+  <div class="launcher" id="installed-launcher" hidden>
+    <main>
+      <div id="requirements">
+        <h1>安裝區網遊戲入口</h1>
+        <p id="permission-blocked" hidden>此入口的區域網路存取已被封鎖。請到 Chrome 的「網站設定」，將這個網站的區域網路權限改為「允許」。</p>
+        <p>將這個入口安裝成網頁應用程式（PWA），即使遊戲主機換了 IP，也能從同一個圖示開啟並輸入新位址。首次連線時，可直接在應用程式內允許區域網路存取。</p>
+        <p>請使用支援區域網路存取（LNA）的瀏覽器。以下步驟以 Chrome 為例。</p>
+        <ol>
+          <li><strong>安裝入口。</strong>在電腦上，點網址列右側的安裝圖示，或從「更多」→「投放、儲存及分享」選擇「將頁面安裝為應用程式」。在 Android 上，點「更多」→「安裝並建立捷徑」→「安裝」。</li>
+          <li><strong>開啟入口。</strong>從主畫面或應用程式清單開啟「姜維傳 RELOAD」，輸入遊戲主機顯示的 IP 和埠號。首次使用時，按「授權並連線」，在瀏覽器的區域網路提示中選擇「允許」。</li>
+        </ol>
+        <p>使用 iPad Safari 遊玩時，可直接掃描遊戲主機上的 QR Code。</p>
+      </div>
+      <section id="connection" hidden>
+        <p class="game-name">三國志姜維傳<span>RELOAD</span></p>
+        <h1>連線至區網伺服器</h1>
+        <p>請使用支援區域網路存取（LNA）的瀏覽器遊玩。</p>
+        <p>在主機上開啟「區網伺服器」，並將兩台裝置連上同一個區網。</p>
+        <p id="permission-help" hidden>首次連線需要區域網路權限。輸入遊戲主機的位址並按「授權並連線」，Chrome 會詢問是否允許這個入口連到區網裝置。</p>
+        <form>
+          <label for="host">主機 IP 和埠號</label>
+          <input id="host" required autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="192.168.50.20:8788">
+          <button type="submit" disabled>請求連線</button>
+        </form>
+        <p id="status" role="status"></p>
+      </section>
+      <a id="project-link" href="https://github.com/kidwm/jiangwei-reload">三國志姜維傳．RELOAD（GitHub）</a>
+    </main>
+  </div>
   <script type="module" src="/launcher.js"></script>
 </body>
 </html>

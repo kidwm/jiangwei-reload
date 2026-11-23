@@ -1,8 +1,11 @@
-const cacheName = "jw-reload-launcher-4";
+const cacheName = "jw-reload-launcher-5";
 const paths = [
   "/",
   "/launcher.js",
   "/launcher.css",
+  "/portal.css",
+  "/desktop-start.png",
+  "/lan-server.png",
   "/public-key.json",
   "/manifest.webmanifest",
   "/favicon.ico",

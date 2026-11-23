@@ -24,8 +24,8 @@ npx cf pages get jiangwei-reload
 （`CLOUDFLARE_API_TOKEN`）及 `CLOUDFLARE_ACCOUNT_ID`。使用具名 cf 設定檔時請匯出
 `CLOUDFLARE_AUTH_PROFILE`。金鑰與憑證只放在本機憑證庫或執行環境。
 
-1. 提交要發布的檔案。部署腳本從本 checkout 的 Git HEAD 讀取 `pwa/` 的 13 個檔案，
-   包括未壓縮的入口與六個圖示。未提交的修改不會上線。新增或更名檔案時同步更新腳本的檔案清單、
+1. 提交要發布的檔案。部署腳本從本 checkout 的 Git HEAD 讀取 `pwa/` 的 16 個檔案，
+   包括一般分頁的樣式、兩張操作擷圖與六個圖示。未提交的修改不會上線。新增或更名檔案時同步更新腳本的檔案清單、
    MIME 類型及 Service Worker 快取清單。
 2. 建立預覽，使用命令輸出的部署網址核對內容。
 
@@ -43,9 +43,9 @@ npx cf pages get jiangwei-reload
    npm run pages:verify
    ```
 
-驗證程式會將 12 個公開檔案與 checkout 逐一比對 SHA-256，並逐項比對 `pwa/_headers`
+驗證程式會將 15 個公開檔案與 checkout 逐一比對 SHA-256，並逐項比對 `pwa/_headers`
 指定的回應標頭。瀏覽器驗收使用 Mac Chrome 獨立設定檔，安裝 PWA 後分別在分頁與獨立視窗
-切換 local-network 權限。一般分頁只顯示安裝說明。獨立視窗為 prompt 時提供「授權並連線」，
+切換 local-network 權限。一般分頁顯示專案首頁、桌面下載與安裝說明。開始遊玩的兩張擷圖可點開放大，頁尾連到 CHANGELOG 和 README。區網擷圖中的 QR Code 只含示意文字。獨立視窗為 prompt 時提供「授權並連線」，
 從使用者送出主機位址的動作向該位址讀取發行簽章。Chrome 在該請求發出前顯示原生授權提示，
 允許後接續同一次連線。granted 時直接提供「請求連線」，denied 時顯示網站設定指引與 GitHub 連結。
 驗收首次提示應使用全新設定檔與在線的測試主機，核對瀏覽器確實顯示提示、同意前主機沒有收到 HTTP
@@ -66,7 +66,7 @@ npx cf pages get jiangwei-reload
 ## 與桌面版同步
 
 - 網頁、樣式、啟動程式、Service Worker 與回應標頭在本庫修改。Service Worker 快取固定入口、
-  圖示、manifest 與公鑰。變更離線內容時檢查快取版號與舊快取清理。
+  兩張操作擷圖、圖示、manifest 與公鑰。變更離線內容時檢查快取版號與舊快取清理。
 - 圖示由桌面專案的 SVG 原稿產生。更新圖示時，將六個 Web 圖檔同步至本庫的 `pwa/`。
   桌面主機另持有本機副本，供 QR Code 直連與加入主畫面使用。Linux 打包也使用 512 px 圖示。
 - 修改 `manifest.webmanifest` 時同步桌面主機的副本。保留根路徑的應用程式 ID、啟動網址與
