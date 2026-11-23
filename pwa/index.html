@@ -15,21 +15,21 @@
   <main>
     <div id="requirements">
       <h1>安裝區網遊戲入口</h1>
-      <p>將這個入口安裝成網頁應用程式（PWA），即使遊戲主機換了 IP，也能從同一個圖示開啟並輸入新位址。連線表單只會在已獲區網授權的獨立視窗中顯示。</p>
+      <p id="permission-blocked" hidden>此入口的區域網路存取已被封鎖。請到 Chrome 的「網站設定」，將這個網站的區域網路權限改為「允許」。</p>
+      <p>將這個入口安裝成網頁應用程式（PWA），即使遊戲主機換了 IP，也能從同一個圖示開啟並輸入新位址。首次連線時，可直接在應用程式內允許區域網路存取。</p>
       <p>請使用支援區域網路存取（LNA）的瀏覽器。以下步驟以 Chrome 為例。</p>
       <ol>
         <li><strong>安裝入口。</strong>在電腦上，點網址列右側的安裝圖示，或從「更多」→「投放、儲存及分享」選擇「將頁面安裝為應用程式」。在 Android 上，點「更多」→「安裝並建立捷徑」→「安裝」。</li>
-        <li><strong>允許區網存取。</strong>在 Chrome 開啟這個網站的「網站設定」，將區域網路權限設為「允許」，讓入口能連到你的遊戲主機。</li>
-        <li><strong>開啟入口。</strong>從主畫面或應用程式清單開啟「姜維傳 RELOAD」，輸入遊戲主機顯示的 IP 和埠號。</li>
+        <li><strong>開啟入口。</strong>從主畫面或應用程式清單開啟「姜維傳 RELOAD」，輸入遊戲主機顯示的 IP 和埠號。首次使用時，按「授權並連線」，在瀏覽器的區域網路提示中選擇「允許」。</li>
       </ol>
       <p>使用 iPad Safari 遊玩時，可直接掃描遊戲主機上的 QR Code。</p>
-      <a id="project-link" href="https://github.com/kidwm/jiangwei-reload">三國志姜維傳．RELOAD（GitHub）</a>
     </div>
     <section id="connection" hidden>
       <p class="game-name">三國志姜維傳<span>RELOAD</span></p>
       <h1>連線至區網伺服器</h1>
       <p>請使用支援區域網路存取（LNA）的瀏覽器遊玩。</p>
       <p>在主機上開啟「區網伺服器」，並將兩台裝置連上同一個區網。</p>
+      <p id="permission-help" hidden>首次連線需要區域網路權限。輸入遊戲主機的位址並按「授權並連線」，Chrome 會詢問是否允許這個入口連到區網裝置。</p>
       <form>
         <label for="host">主機 IP 和埠號</label>
         <input id="host" required autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="192.168.50.20:8788">
@@ -37,6 +37,7 @@
       </form>
       <p id="status" role="status"></p>
     </section>
+    <a id="project-link" href="https://github.com/kidwm/jiangwei-reload">三國志姜維傳．RELOAD（GitHub）</a>
   </main>
   <script type="module" src="/launcher.js"></script>
 </body>

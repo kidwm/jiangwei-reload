@@ -1,4 +1,4 @@
-const cacheName = "jw-reload-launcher-3";
+const cacheName = "jw-reload-launcher-4";
 const paths = [
   "/",
   "/launcher.js",

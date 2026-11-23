@@ -45,8 +45,12 @@ npx cf pages get jiangwei-reload
 
 驗證程式會將 12 個公開檔案與 checkout 逐一比對 SHA-256，並逐項比對 `pwa/_headers`
 指定的回應標頭。瀏覽器驗收使用 Mac Chrome 獨立設定檔，安裝 PWA 後分別在分頁與獨立視窗
-切換 local-network 權限。只有獨立視窗的 granted 狀態應顯示可送出的連線表單。
-同一視窗撤銷授權後應立即回到安裝說明與 GitHub 連結。
+切換 local-network 權限。一般分頁只顯示安裝說明。獨立視窗為 prompt 時提供「授權並連線」，
+從使用者送出主機位址的動作向該位址讀取發行簽章。Chrome 在該請求發出前顯示原生授權提示，
+允許後接續同一次連線。granted 時直接提供「請求連線」，denied 時顯示網站設定指引與 GitHub 連結。
+驗收首次提示應使用全新設定檔與在線的測試主機，核對瀏覽器確實顯示提示、同意前主機沒有收到 HTTP
+請求，同意後收到一次發行清單請求。另檢查同一視窗撤權後立即切回相應狀態。
+詳見 [Chrome 的區網授權指引](https://developer.chrome.com/docs/modern-web-guidance/guides/security/local-network-access)。
 
 `cf pages deploy` 在此版本不支援既有 Pages 專案。`tools/deploy-pages.mjs` 透過 cf 的
 官方驗證函式庫取得該專案的短效上傳授權，依 Pages Direct Upload 流程上傳內容與雜湊。

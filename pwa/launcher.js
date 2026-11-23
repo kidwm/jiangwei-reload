@@ -5,19 +5,30 @@ const launcher = document.body;
 const connection = document.querySelector("#connection");
 const requirements = document.querySelector("#requirements");
 const button = form.querySelector("button");
+const permissionHelp = document.querySelector("#permission-help");
+const projectLink = document.querySelector("#project-link");
+const blocked = document.querySelector("#permission-blocked");
 const standalone = matchMedia("(display-mode: standalone)");
 let permission;
 let attempt;
 
-function canConnect() {
-  return (standalone.matches || navigator.standalone === true) && permission?.state === "granted";
+function isInstalledWindow() {
+  return standalone.matches || navigator.standalone === true;
+}
+function canSubmit() {
+  return isInstalledWindow() && (permission?.state === "prompt" || permission?.state === "granted");
 }
 function updateLauncher() {
-  const allowed = canConnect();
-  connection.hidden = !allowed;
-  requirements.hidden = allowed;
-  button.disabled = !allowed || !!attempt;
-  if (!allowed) {
+  const available = canSubmit();
+  const needsPermission = available && permission.state === "prompt";
+  connection.hidden = !available;
+  requirements.hidden = available;
+  permissionHelp.hidden = !needsPermission;
+  projectLink.hidden = available && !needsPermission;
+  blocked.hidden = !(isInstalledWindow() && permission?.state === "denied");
+  button.textContent = needsPermission ? "授權並連線" : "請求連線";
+  button.disabled = !available || !!attempt;
+  if (!available) {
     attempt?.abort();
     status.textContent = "";
   }
@@ -122,7 +133,7 @@ async function loadGame(server, signal) {
 }
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (!canConnect() || attempt) return;
+  if (!canSubmit() || attempt) return;
   attempt = new AbortController();
   updateLauncher();
   try {
@@ -130,7 +141,9 @@ form.addEventListener("submit", async (event) => {
     try {
       localStorage.setItem(addressKey, host.value.trim());
     } catch { /* optional */ }
-    status.textContent = "正在連線並驗證遊戲…";
+    status.textContent = permission.state === "prompt"
+      ? "請在瀏覽器的區域網路提示中選擇「允許」。"
+      : "正在連線並驗證遊戲…";
     await loadGame(server, AbortSignal.any([attempt.signal, AbortSignal.timeout(30000)]));
   } catch (error) {
     const message = error instanceof TypeError || error.name === "TimeoutError"
@@ -149,6 +162,14 @@ form.addEventListener("submit", async (event) => {
 standalone.addEventListener("change", updateLauncher);
 try {
   permission = await navigator.permissions.query({ name: "local-network" });
-  permission.addEventListener("change", updateLauncher);
+  permission.addEventListener("change", () => {
+    if (permission.state !== "granted") {
+      attempt?.abort();
+      status.textContent = "";
+    } else if (attempt) {
+      status.textContent = "正在連線並驗證遊戲…";
+    }
+    updateLauncher();
+  });
   updateLauncher();
 } catch { /* Browsers without a queryable LAN permission keep the project link. */ }
